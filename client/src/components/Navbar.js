@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import HamburgerMenu from './HamburgerMenu';
 
 const NavbarContainer = styled.nav`
   display: flex;
@@ -56,7 +57,10 @@ const Button = styled.button`
   margin-left: 1rem;
   margin-right: 1rem;
 `;
-
+const Utils = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+`;
 const Navbar = () => {
 
   return (
@@ -66,10 +70,11 @@ const Navbar = () => {
         <SearchIcon src="/images/search.png" alt="searchIcon"/>
         <SearchInput type="text" placeholder="Search..." />
       </SearchContainer>
-      <div>
+      <Utils>
         <Link to={"/login"}><Button>Login</Button></Link>
         <Link to={"/cart"}><Button>Cart</Button></Link>
-      </div>
+        <HamburgerMenu/>
+      </Utils>
     </NavbarContainer>
   );
 };
