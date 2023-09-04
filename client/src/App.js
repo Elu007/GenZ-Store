@@ -1,11 +1,13 @@
 import React from 'react';
 import './App.css';
 import { Route, Routes } from "react-router-dom"
-import Navbar from './components/Navbar';
-import Home from './components/Home';
-import NotFound from './components/NotFound';
-import Login from './components/Login';
+import Navbar from './pages/Navbar';
+import Home from './pages/Home';
+import NotFound from './pages/NotFound';
+import Login from './pages/Login';
 import Cart from './components/Cart';
+import AddProduct from './pages/AddProducts';
+import ProductView from './pages/ProductView';
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/api/products/get/:id" element={<ProductView/>} />
+        <Route path="/addproduct" element={<AddProduct />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

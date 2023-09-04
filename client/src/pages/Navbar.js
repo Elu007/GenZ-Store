@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import HamburgerMenu from './HamburgerMenu';
+import HamburgerMenu from '../components/HamburgerMenu';
 
 const NavbarContainer = styled.nav`
   display: flex;
@@ -63,9 +63,10 @@ const Utils = styled.div`
 `;
 const Navbar = () => {
 
+
   return (
     <NavbarContainer>
-      <Logo src="/images/storelogo.svg" alt="logo" />
+      <Link to={"/"}><Logo src="/images/storelogo.svg" alt="logo"/></Link>
       <SearchContainer>
         <SearchIcon src="/images/search.png" alt="searchIcon"/>
         <SearchInput type="text" placeholder="Search..." />

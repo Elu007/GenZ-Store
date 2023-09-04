@@ -10,7 +10,7 @@ const HamburgerIcon = styled.img`
 const MobileMenuContainer = styled.div`
   position: fixed;
   top: 0;
-  right: ${({ isopen }) => (isopen ? '0' : '-300px')};
+  right: ${({ isopen }) => (isopen === 'true' ? '0' : '-300px')}; /* Use isopen as a string */
   width: 300px;
   height: 100%;
   background-color: #333;
@@ -36,7 +36,7 @@ const HamburgerMenu = () => {
         alt="menu"
         onClick={toggleMenu}
       />
-      <MobileMenuContainer isopen={isopen}>
+      <MobileMenuContainer isopen={isopen.toString()}>
         <MobileMenuContent>
           {/* ... (menu links, filters, etc.) */}
           <button onClick={toggleMenu}>
