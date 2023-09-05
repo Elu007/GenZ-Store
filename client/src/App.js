@@ -5,7 +5,7 @@ import Navbar from './pages/Navbar';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import Login from './pages/Login';
-import Cart from './components/Cart';
+import Cart from './pages/Cart';
 import AddProduct from './pages/AddProducts';
 import ProductView from './pages/ProductView';
 
