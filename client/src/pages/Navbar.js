@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import HamburgerMenu from '../components/HamburgerMenu';
 
 const NavbarContainer = styled.nav`
   display: flex;
+  height: 5vh;
   justify-content: space-between;
   align-items: center;
   background-color: #333;
@@ -12,6 +12,7 @@ const NavbarContainer = styled.nav`
 
   @media (max-width: 768px) {
     flex-direction: column;
+    height: auto;
   }
 `;
 
@@ -19,32 +20,6 @@ const Logo = styled.img`
     width: 50px;
     height: auto;
     margin-left: 1rem;
-`;
-
-const SearchContainer = styled.div`
-  display: flex;
-  width: 55%;
-  align-items: center;
-  background-color: #f5f5f5;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 0.3rem 0.5rem;
-  @media (max-width: 768px) {
-  margin-bottom: 0.7rem;
-  }
-`;
-
-const SearchInput = styled.input`
-  border: none;
-  outline: none;
-  background-color: transparent;
-  margin-left: 0.3rem;
-`;
-
-const SearchIcon = styled.img`
-  width: 25px;
-  margin-left: 0.3rem;
-  margin-right: 0.3rem;
 `;
 
 const Button = styled.button`
@@ -63,18 +38,13 @@ const Utils = styled.div`
 `;
 const Navbar = () => {
 
-
   return (
     <NavbarContainer>
       <Link to={"/"}><Logo src="/images/storelogo.svg" alt="logo"/></Link>
-      <SearchContainer>
-        <SearchIcon src="/images/search.png" alt="searchIcon"/>
-        <SearchInput type="text" placeholder="Search..." />
-      </SearchContainer>
+      {/* Here I will add the user name and greetings */}
       <Utils>
         <Link to={"/login"}><Button>Login</Button></Link>
         <Link to={"/cart"}><Button>Cart</Button></Link>
-        <HamburgerMenu/>
       </Utils>
     </NavbarContainer>
   );

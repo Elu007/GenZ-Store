@@ -1,11 +1,13 @@
 import React from 'react'
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components'
 import axios from 'axios';
 import Card from '../components/Card';
+import HamburgerMenu from '../components/HamburgerMenu';
 
 const Home = () => {
   const [products, setProducts] = useState([]);
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     fetchProducts();
@@ -22,24 +24,35 @@ const Home = () => {
   };
 
   return (
-    <Container>
-      <Content>
-        <Image>
-          <img src="/images/banner.jpg" alt="bannerimage" />
-        </Image>
-        <CardContainer>
-        {products?.map((product) => (
-          <Card
-            key={product._id}
-            imageUrl={product.imageUrl}
-            title={product.title}
-            // We have to pass the ID as product._id otherwise it won't work
-            id={product._id}
-          />
-        ))}
-        </CardContainer>
-      </Content>
-    </Container>
+    <>
+      <Container>
+        <Content>
+          <Image>
+            <img src="/images/banner.jpg" alt="bannerimage" />
+          </Image>
+          <SearchDiv>
+            <SearchContainer>
+              <SearchIcon src="/images/search.png" alt="searchIcon" />
+              <SearchInput type="text" placeholder="Search..." onChange={(e) => setSearch(e.target.value)}/>
+            </SearchContainer>
+            <HamburgerMenu/>
+          </SearchDiv>
+          <CardContainer>
+            {products?.filter((product) =>{
+              return search.toLowerCase() === '' ? product : product.title.toLowerCase().includes(search); 
+            }).map((product) => (
+              <Card
+                key={product._id}
+                imageUrl={product.imageUrl}
+                title={product.title}
+                // We have to pass the ID as product._id otherwise it won't work
+                id={product._id}
+              />
+            ))}
+          </CardContainer>
+        </Content>
+      </Container>
+    </>
   )
 }
 
@@ -57,6 +70,39 @@ const Container = styled.div`
   }
 `;
 
+const SearchDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+`;
+const SearchContainer = styled.div`
+  display: flex;
+  margin-right: 20vw;
+  width: 50%;
+  align-items: center;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0.3rem 0.5rem;
+  @media (max-width: 768px) {
+  margin-bottom: 0.7rem;
+  }
+`;
+
+const SearchInput = styled.input`
+  border: none;
+  outline: none;
+  background-color: transparent;
+  margin-left: 0.3rem;
+`;
+
+const SearchIcon = styled.img`
+  width: 25px;
+  margin-left: 0.3rem;
+  margin-right: 0.3rem;
+`;
+
 const Content = styled.div`
   flex: 2;
 `;
@@ -64,7 +110,7 @@ const Content = styled.div`
 const Image = styled.div`
   img {
     width: 100%;
-    height: 60vh;
+    height: 50vh;
     @media (max-width: 768px) {
       width: 100%;
       height: auto;
