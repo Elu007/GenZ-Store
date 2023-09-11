@@ -8,19 +8,36 @@ import HamburgerMenu from '../components/HamburgerMenu';
 const Home = () => {
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
 
   useEffect(() => {
     fetchProducts();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    // eslint-disable-next-line
+  }, [selectedCategory]); // Fetch products when the selectedCategory changes
+
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get('/api/products/get');
+      const response = await axios.get('/api/products/get', {
+        params: {
+          category: selectedCategory,
+        },
+      });
       setProducts(response.data);
     } catch (error) {
       console.error('Error fetching products:', error);
     }
+  };
+  const fetchAllProducts = async () => {
+    try {
+      const response = await axios.get('/api/products/get');
+      setProducts(response.data);
+    } catch (error) {
+      console.error('Error fetching all products:', error);
+    }
+  };
+  const handleCategorySelect = (category) => {
+    setSelectedCategory(category);
   };
 
   return (
@@ -35,7 +52,7 @@ const Home = () => {
               <SearchIcon src="/images/search.png" alt="searchIcon" />
               <SearchInput type="text" placeholder="Search..." onChange={(e) => setSearch(e.target.value)}/>
             </SearchContainer>
-            <HamburgerMenu/>
+            <HamburgerMenu onCategorySelect={handleCategorySelect} onAllProductsClick={fetchAllProducts}/>
           </SearchDiv>
           <CardContainer>
             {products?.filter((product) =>{

@@ -37,7 +37,14 @@ app.post("/api/products/add", async (req, res) => {
 // API to get products from database
 app.get('/api/products/get', async (req, res) => {
     try {
-        const data = await Product.find();
+        const category = req.query.category; // Get the category query parameter
+        let query = {}; // Initialize an empty query object
+
+        if (category) {
+            query = { category }; // If a category is specified, include it in the query
+        }
+
+        const data = await Product.find(query);
         res.status(200).json(data);
     } catch (error) {
         res.status(500).send(error.message);

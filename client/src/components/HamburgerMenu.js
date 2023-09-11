@@ -22,11 +22,36 @@ const MobileMenuContent = styled.div`
   color: white;
 `;
 
-const HamburgerMenu = () => {
+const CategoryButtons = styled.div`
+  margin-bottom: 10px;
+  button{
+  display: flex;
+  flex-direction: column;
+  padding: 9px;
+  margin-top: 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  
+  @media (max-width: 768px) {
+     margin: 0.1rem 0;
+     padding: 0.2rem 0.2rem;
+    }
+  }
+`;
+
+const HamburgerMenu = ({ onCategorySelect, onAllProductsClick  }) => {
   const [isopen, setisopen] = useState(false);
 
   const toggleMenu = () => {
     setisopen(!isopen);
+  };
+
+  const handleCategorySelect = (category) => {
+    setisopen(false); // Close the menu when a category is selected
+    onCategorySelect(category);
   };
 
   return (
@@ -38,9 +63,15 @@ const HamburgerMenu = () => {
       />
       <MobileMenuContainer isopen={isopen.toString()}>
         <MobileMenuContent>
-          {/* ... (menu links, filters, etc.) */}
+          <CategoryButtons>
+          <button onClick={() => handleCategorySelect('Electronics')}>Electronics</button>
+            <button onClick={() => handleCategorySelect('Clothes')}>Clothes</button>
+            <button onClick={() => handleCategorySelect('Beauty')}>Beauty</button>
+            <button onClick={() => handleCategorySelect('Bags')}>Bags</button>
+            <button onClick={onAllProductsClick}>All Products</button>
+          </CategoryButtons>
           <button onClick={toggleMenu}>
-            <img src='/images/close.png' alt='close'/>
+            <img src='/images/close.png' alt='close' />
           </button>
         </MobileMenuContent>
       </MobileMenuContainer>
