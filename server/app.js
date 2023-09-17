@@ -64,21 +64,6 @@ app.get('/api/products/get/:id', async (req, res) => {
     }
 });
 
-// Create a new API route for category filtering
-app.get('/api/products/getByCategory', async (req, res) => {
-    try {
-        const { category } = req.query;
-
-        if (!category) {
-            return res.status(400).json({ error: 'Category parameter is required.' });
-        }
-
-        const data = await Product.find({ category });
-        res.status(200).json(data);
-    } catch (error) {
-        res.status(500).send(error.message);
-    }
-});
 
 module.exports = app;
 

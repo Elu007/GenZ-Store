@@ -64,6 +64,8 @@ const Home = () => {
                 title={product.title}
                 // We have to pass the ID as product._id otherwise it won't work
                 id={product._id}
+                price={product.price}
+                rating={product.rating}
               />
             ))}
           </CardContainer>

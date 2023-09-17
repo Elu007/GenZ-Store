@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { useStateValue } from '../StateProvider';
 
 const NavbarContainer = styled.nav`
   display: flex;
@@ -37,6 +38,7 @@ const Utils = styled.div`
   justify-content: space-evenly;
 `;
 const Navbar = () => {
+  const [{ basket }, dispatch] = useStateValue();
 
   return (
     <NavbarContainer>
@@ -44,7 +46,7 @@ const Navbar = () => {
       {/* Here I will add the user name and greetings */}
       <Utils>
         <Link to={"/login"}><Button>Login</Button></Link>
-        <Link to={"/cart"}><Button>Cart</Button></Link>
+        <Link to={"/cart"}><Button>Cart {basket.length}</Button></Link>
       </Utils>
     </NavbarContainer>
   );

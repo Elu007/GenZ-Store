@@ -54,6 +54,7 @@ const HamburgerMenu = ({ onCategorySelect, onAllProductsClick  }) => {
     onCategorySelect(category);
   };
 
+
   return (
     <>
       <HamburgerIcon
@@ -64,7 +65,7 @@ const HamburgerMenu = ({ onCategorySelect, onAllProductsClick  }) => {
       <MobileMenuContainer isopen={isopen.toString()}>
         <MobileMenuContent>
           <CategoryButtons>
-          <button onClick={() => handleCategorySelect('Electronics')}>Electronics</button>
+            <button onClick={() => handleCategorySelect('Electronics')}>Electronics</button>
             <button onClick={() => handleCategorySelect('Clothes')}>Clothes</button>
             <button onClick={() => handleCategorySelect('Beauty')}>Beauty</button>
             <button onClick={() => handleCategorySelect('Bags')}>Bags</button>

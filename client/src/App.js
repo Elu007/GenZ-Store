@@ -8,6 +8,8 @@ import Login from './pages/Login';
 import Cart from './pages/Cart';
 import AddProduct from './pages/AddProducts';
 import ProductView from './pages/ProductView';
+import Address from './pages/Address';
+import Payment from './pages/Payment';
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/address" element={<Address/>} />
+        <Route path="/payment" element={<Payment/>} />
         <Route path="/api/products/get/:id" element={<ProductView/>} />
         <Route path="/addproduct" element={<AddProduct />} />
         <Route path="*" element={<NotFound />} />

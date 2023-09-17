@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
+import { useStateValue } from '../StateProvider';
 
 const CardWrapper = styled.div`
   width: 24vw;
@@ -43,8 +44,20 @@ const CardButton = styled.button`
     }
 `;
 
-const Card = ({ imageUrl, title, id }) => {
+const Card = ({ imageUrl, title, price, rating, id }) => {
   // console.log(id);
+  const [{basket}, dispatch] = useStateValue();
+
+  const addToBasket = (e) =>{
+    e.preventDefault();
+
+    dispatch({
+      type:'ADD_TO_BASKET',
+      item:{
+        imageUrl, title, price, rating, id
+      }
+    })
+  }
     return (
         <CardWrapper>
             <CardImage src={imageUrl} alt={title} />
@@ -53,7 +66,7 @@ const Card = ({ imageUrl, title, id }) => {
                     <h4>{title}</h4>
                 </CardTitle>
                 <Link to={`/api/products/get/${id}`}><CardButton>View Details</CardButton></Link>
-                <CardButton>Add to Cart</CardButton>
+                <CardButton onClick={addToBasket}>Add to Cart</CardButton>
             </CardContent>
         </CardWrapper>
     );
