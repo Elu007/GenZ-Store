@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { Route, Routes } from "react-router-dom"
-import Navbar from './pages/Navbar';
+import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import Login from './pages/Login';
@@ -10,6 +10,12 @@ import AddProduct from './pages/AddProducts';
 import ProductView from './pages/ProductView';
 import Address from './pages/Address';
 import Payment from './pages/Payment';
+import {Elements} from '@stripe/react-stripe-js'
+import { loadStripe } from '@stripe/stripe-js';
+
+const promise = loadStripe(
+  "pk_test_51NeC2BSIt5ZXu8rJGhLLPkfC3HCy5CbKry8c8ozYP4NmfjI3bTCMqqLm4YuRqdhsiBJVmWM1UT9PqM0qG7Q8YWAz00ZH4T0ahw"
+);
 
 function App() {
   return (
@@ -20,7 +26,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/address" element={<Address/>} />
-        <Route path="/payment" element={<Payment/>} />
+        <Route path="/payment" element={<Elements stripe={promise}><Payment/></Elements>} />
         <Route path="/api/products/get/:id" element={<ProductView/>} />
         <Route path="/addproduct" element={<AddProduct />} />
         <Route path="*" element={<NotFound />} />

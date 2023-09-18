@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { getBasketTotal } from '../reducer'
 import { useNavigate } from "react-router-dom";
 import { NumericFormat } from 'react-number-format';
+import { Rating } from '@mui/material';
 
 
 const Cart = () => {
@@ -33,6 +34,7 @@ const Cart = () => {
                 <Description>
                   <h4>{product.title}</h4>
                   <p>₹{product.price}</p>
+                  <Rating name="half-rating-read" defaultValue={product.rating} precision={0.5} readOnly />
                   <button onClick={(e) => removeFromBasket(e, product.id)}>Remove</button>
                 </Description>
               </Product>

@@ -29,8 +29,7 @@ const CardTitle = styled.div`
 `;
 
 const CardButton = styled.button`
-    margin-left: 1rem;
-    margin-right: 1rem;
+  margin-left: 1rem;
   padding: 0.5rem 1rem;
   background-color: #007bff;
   color: white;
