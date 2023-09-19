@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 import { Rating } from '@mui/material'
 import LoadingSpinner from '../components/LoadingSpinner';
+import { useStateValue } from '../StateProvider';
 
 const ProductView = () => {
   const { id } = useParams(); // Get the productId from the URL
-  console.log(id);
+  // console.log(id);
 
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [{basket},dispatch] = useStateValue();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchProduct();
@@ -32,6 +35,39 @@ const ProductView = () => {
     return <LoadingSpinner />; // Render the loading spinner while data is loading
   }
 
+  const addToBasket = (e) =>{
+    e.preventDefault();
+
+    dispatch({
+      type:'ADD_TO_BASKET',
+      item:{
+        imageUrl: product.imageUrl,
+        title: product.title,
+        price: product.price, 
+        rating: product.rating, 
+        id: id
+      }
+    })
+  }
+
+  const buyNow = (e) =>{
+    e.preventDefault();
+
+    dispatch({
+      type:'ADD_TO_BASKET',
+      item:{
+        imageUrl: product.imageUrl,
+        title: product.title,
+        price: product.price, 
+        rating: product.rating, 
+        id: id
+      }
+    })
+    navigate('/address');
+  }
+  console.log(basket);
+  
+
   return (
     <Container>
       <Image>
@@ -46,8 +82,8 @@ const ProductView = () => {
           <h2>Price: ₹{product.price}</h2>
           <Rating name="half-rating-read" defaultValue={product.rating} precision={0.5} readOnly />
         </Description>
-        <Button>Buy Now</Button>
-        <Button>Add to Cart</Button>
+        <Button onClick={buyNow}>Buy Now</Button>
+        <Button onClick={addToBasket}>Add to Cart</Button>
       </ProductInfo>
     </Container>
   );

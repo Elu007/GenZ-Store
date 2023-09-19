@@ -35,7 +35,9 @@ const Cart = () => {
                   <h4>{product.title}</h4>
                   <p>₹{product.price}</p>
                   <Rating name="half-rating-read" defaultValue={product.rating} precision={0.5} readOnly />
+                  <div>
                   <button onClick={(e) => removeFromBasket(e, product.id)}>Remove</button>
+                  </div>
                 </Description>
               </Product>
             ))
