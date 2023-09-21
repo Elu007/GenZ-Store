@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 require('dotenv').config(); // Load environment variables from .env
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const app = express();
 
 // Middleware
@@ -64,6 +65,20 @@ app.get('/api/products/get/:id', async (req, res) => {
     }
 });
 
+// API for payment
+app.post('/payment/create', async(req,res) =>{
+    const total = req.body.amount;
+    console.log("Payment request recieved for this rupees", total);
+
+    const payment = await stripe.paymentIntents.create({
+        amount:total * 100,
+        currency:'inr',
+    });
+
+    res.status(201).send({
+        clientSecret: payment.client_secret,
+    })
+})
 
 module.exports = app;
 

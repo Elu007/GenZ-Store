@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 import { useStateValue } from '../StateProvider';
 import { getBasketTotal } from '../reducer';
 import { NumericFormat } from 'react-number-format';
@@ -10,9 +11,36 @@ import { CardElement,useElements,useStripe } from '@stripe/react-stripe-js';
 const Payment = () => {
   const [{ address, basket, user }, dispatch] = useStateValue();
   const navigate = useNavigate();
-
+  const [clientSecret, setClientSecret] = useState('');
   const elements = useElements();
   const stripe = useStripe();
+
+  useEffect(()=>{
+    const fetchClientSecret = async()=>{
+      const data = await axios.post('/payment/create', {
+        amount:getBasketTotal(basket),
+      });
+      setClientSecret(data.data.clientSecret);
+    };
+    fetchClientSecret();
+    // eslint-disable-next-line
+  },[])
+
+  const confirmPayment = async (e) =>{
+    e.preventDefault();
+
+    await stripe.confirmCardPayment(clientSecret,{
+      payment_method:{
+        card: elements.getElement(CardElement)
+      }
+    }).then((result) =>{
+      alert("Payment Successful");
+      dispatch({
+        type:"EMPTY_BASKET"
+      })
+      navigate('/');
+    }).catch((err) => console.log(err));
+  }
 
   return (
     <Container>
@@ -63,7 +91,7 @@ const Payment = () => {
           <p>Subtotal ( {basket.length} items): &nbsp;
             <NumericFormat value={getBasketTotal(basket).toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'₹'} />
           </p>
-          <button onClick={() => navigate("/address")}>
+          <button onClick={confirmPayment}>
             Place Order
           </button>
         </Subtotal>
