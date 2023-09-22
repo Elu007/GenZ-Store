@@ -9,6 +9,7 @@ const HamburgerIcon = styled.img`
 
 const MobileMenuContainer = styled.div`
   position: fixed;
+  margin-top: 1rem;
   top: 0;
   right: ${({ isopen }) => (isopen === 'true' ? '0' : '-300px')}; /* Use isopen as a string */
   width: 300px;

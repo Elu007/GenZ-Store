@@ -68,7 +68,7 @@ app.get('/api/products/get/:id', async (req, res) => {
 // API for payment
 app.post('/payment/create', async(req,res) =>{
     const total = req.body.amount;
-    console.log("Payment request recieved for this rupees", total);
+    // console.log("Payment request recieved for this rupees", total);
 
     const payment = await stripe.paymentIntents.create({
         amount:total * 100,
