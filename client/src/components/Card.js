@@ -20,6 +20,10 @@ const CardImage = styled.img`
 
 const CardContent = styled.div`
   padding: 1rem;
+  h3{
+    margin-top: 5px;
+    margin-bottom: 8px;
+  }
 `;
 
 const CardTitle = styled.div`
@@ -64,6 +68,7 @@ const Card = ({ imageUrl, title, price, rating, id }) => {
                 <CardTitle>
                     <h4>{title}</h4>
                 </CardTitle>
+                    <h3>Price: ₹{price}</h3>
                 <Link to={`/api/products/get/${id}`}><CardButton>View Details</CardButton></Link>
                 <CardButton onClick={addToBasket}>Add to Cart</CardButton>
             </CardContent>

@@ -1,16 +1,18 @@
-import React,{useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { useStateValue } from '../StateProvider';
+import axios from 'axios';
 
 const NavbarContainer = styled.nav`
   display: flex;
   height: 5vh;
+  color: white;
   justify-content: space-between;
   align-items: center;
   background-color: #333;
   padding: 1rem;
-  position: sticky;
+  position: sticky; 
   top: 0;
   width: 100%;
   z-index: 100;
@@ -23,6 +25,10 @@ const NavbarContainer = styled.nav`
   @media (max-width: 768px) {
     flex-direction: column;
     height: auto;
+    h4{
+      margin-bottom: 5px;
+      word-wrap: break-word;
+    }
   }
 `;
 
@@ -52,15 +58,64 @@ const Utils = styled.div`
 `;
 const Navbar = () => {
   const [{ basket }, dispatch] = useStateValue();
-  const [isSticky, setIsSticky] = useState(false);
+  const [userName, setUserName] = useState('');
+  const [show, setShow] = useState(false);
+
+  const [issticky, setissticky] = useState(false);
+
+  const userNameShow = async () => {
+    try {
+      const response = await axios.get('/getdata', {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.status === 200) {
+        const data = response.data;
+        console.log(data);
+        setUserName(data.name);
+        setShow(true);
+      } else {
+        const error = new Error('Request failed');
+        throw error;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // Logout function
+  const handleLogout = async () => {
+    try {
+      const response = await axios.get('/logout', {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true, // Include credentials to send cookies
+      });
+
+      if (response.status === 200) {
+        dispatch({ type: 'USER', payload: false });
+        window.location.reload();
+      } else {
+        const error = new Error(response.statusText);
+        throw error;
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   useEffect(() => {
     // Function to handle scroll event
+    userNameShow();
     const handleScroll = () => {
       if (window.scrollY > 0) {
-        setIsSticky(true);
+        setissticky(true);
       } else {
-        setIsSticky(false);
+        setissticky(false);
       }
       // eslint-disable-next-line
     };
@@ -76,12 +131,21 @@ const Navbar = () => {
 
 
   return (
-    <NavbarContainer className={isSticky ? 'navbar sticky' : 'navbar'} isSticky={isSticky}>
-      <Link to={"/"}><Logo src="/images/storelogo.svg" alt="logo"/></Link>
+    <NavbarContainer className={issticky ? 'navbar sticky' : 'navbar'} issticky={issticky}>
+      <Link to={"/"}><Logo src="/images/storelogo.svg" alt="logo" /></Link>
       {/* Here I will add the user name and greetings */}
+      <h4>Welcome {userName} {show ? ', happy to see you back at our GenZ store' : ', we are the GenZ shoppers'}</h4>
       <Utils>
-        <Link to={"/login"}><Button>Login</Button></Link>
-        <Link to={"/cart"}><Button><img src="/images/cart.png" alt="cart" /> {basket.length}</Button></Link>
+        {userName ? (
+          <>
+            <Button onClick={handleLogout}>Logout</Button>
+            <Link to={"/cart"}><Button><img src="/images/cart.png" alt="cart" />{basket?.length || 0}</Button></Link>
+          </>
+        ) : (
+          <Link to={"/signup"}>
+            <Button>SignUp/Login</Button>
+          </Link>
+        )}
       </Utils>
     </NavbarContainer>
   );

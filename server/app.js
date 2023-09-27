@@ -8,6 +8,7 @@ const app = express();
 
 // Middleware
 app.use(bodyParser.json());
+app.use(express.json())
 app.use(cors());
 
 // Import the product model
@@ -22,6 +23,8 @@ mongoose.connection.on('connected', () => {
     console.log('Connected to MongoDB');
 });
 
+// Router Import
+app.use(require('./routes/auth'));
 
 // API to Add product in database
 app.post("/api/products/add", async (req, res) => {

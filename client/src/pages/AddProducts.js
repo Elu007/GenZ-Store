@@ -137,6 +137,7 @@ const Button = styled.button`
   outline: none;
   border-radius: 10px;
   margin-top: 30px;
+  cursor: pointer;
 `;
 
 export default AddProduct

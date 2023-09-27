@@ -1,6 +1,6 @@
 export const initialState = {
     basket: [],
-    user: JSON.parse(localStorage.getItem("user")),
+    user: localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : null,
     address: {},
 };
 
@@ -15,6 +15,12 @@ const reducer = (state, action) => {
                 ...state,
                 basket: [...state.basket, action.item],
             };
+            case "USER":
+                return {
+                    ...state,
+                    user: action.payload,
+                };
+            
         case "REMOVE_FROM_BASKET":
             const index = state.basket.findIndex(
                 (basketItem) => basketItem.id === action.id
@@ -39,12 +45,6 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 address: { ...action.item },
-            };
-
-        case "SET_USER":
-            return {
-                ...state,
-                user: action.user,
             };
 
         case "EMPTY_BASKET":
