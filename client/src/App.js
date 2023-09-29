@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Route, Routes } from "react-router-dom"
+import { Route, Routes  } from "react-router-dom"
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
@@ -14,6 +14,8 @@ import {Elements} from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js';
 import Signup from './pages/Signup';
 import axios from 'axios';
+import BackToTopButton from './components/BackToTopButton';
+import { Toaster } from 'react-hot-toast';
 
 const promise = loadStripe(
   "pk_test_51NeC2BSIt5ZXu8rJGhLLPkfC3HCy5CbKry8c8ozYP4NmfjI3bTCMqqLm4YuRqdhsiBJVmWM1UT9PqM0qG7Q8YWAz00ZH4T0ahw"
@@ -35,6 +37,8 @@ function App() {
         <Route path="/addproduct" element={<AddProduct />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <Toaster position="bottom-left" reverseOrder={false}/>
+      <BackToTopButton/>
     </>
   );
 }

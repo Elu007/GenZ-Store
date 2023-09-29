@@ -1,21 +1,22 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 // import axios from 'axios';
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useStateValue } from '../StateProvider';
+import toast from 'react-hot-toast';
 
 const Login = () => {
   const navigate = useNavigate();
-  const [email,setEmail] = useState('');
-  const [password,setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const [{ basket }, dispatch] = useStateValue();
 
   const login = async (e) => {
     e.preventDefault();
-    const res = await fetch('/login',{
-      method:"POST",
-      headers:{
+    const res = await fetch('/login', {
+      method: "POST",
+      headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
@@ -24,15 +25,17 @@ const Login = () => {
       })
     });
     const data = res.json();
-    if(res.status === 400 || !data){
-      window.alert("Invalid Credentials");
-    } else{
-      dispatch({type:"USER",payload:true})
-      window.alert("Login success")
+    if (res.status === 400 || !data) {
+      toast.error("Invalid Credentials 🙄")
+    } else {
+      dispatch({ type: "USER", payload: true })
+      toast.success('Successfully logged in 😃!')
       navigate("/");
-      window.location.reload();
+      setTimeout(function () {
+        window.location.reload();
+      }, 1500);
     }
-    
+
   };
   return (
     <Container>
@@ -48,7 +51,7 @@ const Login = () => {
           <input
             type="email" name='email'
             placeholder="example@example.com"
-            value={email} onChange={(e) => setEmail(e.target.value)} 
+            value={email} onChange={(e) => setEmail(e.target.value)}
           />
         </InputContainer>
         <InputContainer>

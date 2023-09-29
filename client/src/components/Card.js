@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import { useStateValue } from '../StateProvider';
+import toast from 'react-hot-toast';
 
 const CardWrapper = styled.div`
   width: 24vw;
@@ -60,6 +61,7 @@ const Card = ({ imageUrl, title, price, rating, id }) => {
         imageUrl, title, price, rating, id
       }
     })
+    toast.success('Added to Cart 🛒');
   }
     return (
         <CardWrapper>

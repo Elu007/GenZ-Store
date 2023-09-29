@@ -5,6 +5,7 @@ import axios from 'axios';
 import { Rating } from '@mui/material'
 import LoadingSpinner from '../components/LoadingSpinner';
 import { useStateValue } from '../StateProvider';
+import toast from 'react-hot-toast';
 
 const ProductView = () => {
   const { id } = useParams(); // Get the productId from the URL
@@ -48,6 +49,7 @@ const ProductView = () => {
         id: id
       }
     })
+    toast.success('Added to Cart 🛒');
   }
 
   const buyNow = (e) =>{

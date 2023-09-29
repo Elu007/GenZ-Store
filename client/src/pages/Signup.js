@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -30,17 +31,17 @@ const Signup = () => {
       });
 
       if (response.status === 201) {
-        window.alert('Successful Registration');
+        toast.success('Successfully Registered 😎!')
         console.log('Registration successful');
 
         navigate('/login');
       } else {
-        window.alert('Invalid Registration');
+        toast.error("Something didn't work 😮!")
         console.log('Registration unsuccessful');
       }
     } catch (error) {
       console.error('Error during registration:', error);
-      window.alert('Registration failed');
+      toast.error("Registration failed 😮!")
     }
   }
 

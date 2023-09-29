@@ -6,6 +6,7 @@ import { getBasketTotal } from '../reducer';
 import { NumericFormat } from 'react-number-format';
 import { useNavigate } from 'react-router-dom';
 import { Rating } from '@mui/material';
+import toast from 'react-hot-toast';
 import { CardElement,useElements,useStripe } from '@stripe/react-stripe-js';
 
 const Payment = () => {
@@ -34,7 +35,7 @@ const Payment = () => {
         card: elements.getElement(CardElement)
       }
     }).then((result) =>{
-      alert("Payment Successful");
+      toast.success('Payment Successful 🎉');
       dispatch({
         type:"EMPTY_BASKET"
       })

@@ -1,70 +1,72 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# GenZ Store: Where Trends Meet Innovation
 
-## Available Scripts
+"Welcome to GenZ Store, your ultimate destination for cutting-edge fashion, tech, and lifestyle essentials curated exclusively for the Generation Z. Explore the latest trends, innovative gadgets, and unique products that match your style and spirit. With a finger on the pulse of GenZ culture, we bring you a seamless shopping experience that celebrates individuality, creativity, and the future. Join us and shop the future today!"
 
-In the project directory, you can run:
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Signup/Login/Logout
+- Payment with Stripe
+- Category Wise Products
+- Products Details Page
+- Add to Cart
+- Search Products
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Screenshots
 
-### `npm run build`
+![Screenshot (79)](https://github.com/Elu007/GenZ-Store/assets/85642896/d7b19da5-9cfe-44c7-9cac-3183135d6e78)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![Screenshot (80)](https://github.com/Elu007/GenZ-Store/assets/85642896/ecf2f3b5-1c5c-4b64-b0e9-fd2592c489d7)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![Screenshot (81)](https://github.com/Elu007/GenZ-Store/assets/85642896/6e556639-f8c4-4fb6-81cb-c26e3f952662)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![Screenshot (82)](https://github.com/Elu007/GenZ-Store/assets/85642896/9c0ad5d5-e31a-4a9e-8b0c-92563303cb16)
 
-### `npm run eject`
+## Tech Stack
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+**Client:** React, React Hooks, Styled Components, React-Hot-Toast, React-Router-Dom v6, MUI v5
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**Server:** NodeJs, Express, MongoDB
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+**Payment Gateway:** Stripe
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+**Others:** Axios, React-Number-Format
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Environment Variables
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+To run this project, you will need to add the following environment variables to your .env file
 
-### Code Splitting
+`MONGODB_URI` It is your remote MongoDB database URL
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+`STRIPE_SECRET_KEY` Visit stripe.com to find your own secret key 
 
-### Analyzing the Bundle Size
+`SECRET_KEY` It is for storing the user password with hashing method
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
+## 🚀 About Me
+I'm a full stack developer... I’m currently learning & practicing React Js, Express js, Node.Js, MongoDB, DSA.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
+📝 I write articles for Geeks For Geeks on a freelance basis.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+📝 I also make contributions to Shiksha.com.
+## 🔗 Links
 
-### Deployment
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/sk-elaf-ahmed-bb85b0210/)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
+## Contributing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Contributions are always welcome!
+
+If you want to contribute and merge code then you can message me on linkedIn so I can check quickly and merge your pull request.
+Thank you...
+
+
+## License
+
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)

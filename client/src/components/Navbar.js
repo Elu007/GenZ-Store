@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { useStateValue } from '../StateProvider';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 
 const NavbarContainer = styled.nav`
   display: flex;
@@ -12,20 +13,18 @@ const NavbarContainer = styled.nav`
   align-items: center;
   background-color: #333;
   padding: 1rem;
-  position: sticky; 
-  top: 0;
+  position: sticky;
+  top: 0; /* Stick to the top of the viewport */
   width: 100%;
   z-index: 100;
 
-  &.sticky {
-    background-color: #333; /* Sticky background color */
-    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2); /* Add a shadow for visual effect */
-  }
+  background-color: #333;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2); /* Add a shadow for visual effect */
 
   @media (max-width: 768px) {
     flex-direction: column;
     height: auto;
-    h4{
+    h4 {
       margin-bottom: 5px;
       word-wrap: break-word;
     }
@@ -61,7 +60,7 @@ const Navbar = () => {
   const [userName, setUserName] = useState('');
   const [show, setShow] = useState(false);
 
-  const [issticky, setissticky] = useState(false);
+  // const [issticky, setissticky] = useState(false);
 
   const userNameShow = async () => {
     try {
@@ -98,7 +97,10 @@ const Navbar = () => {
 
       if (response.status === 200) {
         dispatch({ type: 'USER', payload: false });
-        window.location.reload();
+        toast.success('Successfully logged out 😓!')
+        setTimeout(function () {
+          window.location.reload();
+        }, 1500);
       } else {
         const error = new Error(response.statusText);
         throw error;
@@ -109,29 +111,12 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    // Function to handle scroll event
     userNameShow();
-    const handleScroll = () => {
-      if (window.scrollY > 0) {
-        setissticky(true);
-      } else {
-        setissticky(false);
-      }
-      // eslint-disable-next-line
-    };
-
-    // Attach the scroll event listener
-    window.addEventListener('scroll', handleScroll);
-
-    // Clean up the listener when the component unmounts
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
   }, []);
 
 
   return (
-    <NavbarContainer className={issticky ? 'navbar sticky' : 'navbar'} issticky={issticky}>
+    <NavbarContainer>
       <Link to={"/"}><Logo src="/images/storelogo.svg" alt="logo" /></Link>
       {/* Here I will add the user name and greetings */}
       <h4>Welcome {userName} {show ? ', happy to see you back at our GenZ store' : ', we are the GenZ shoppers'}</h4>
