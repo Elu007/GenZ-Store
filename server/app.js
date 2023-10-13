@@ -26,6 +26,10 @@ mongoose.connection.on('connected', () => {
 // Router Import
 app.use(require('./routes/auth'));
 
+
+app.get('/', (req, res) => {
+    res.send('hello world')
+})
 // API to Add product in database
 app.post("/api/products/add", async (req, res) => {
     try {
@@ -69,13 +73,13 @@ app.get('/api/products/get/:id', async (req, res) => {
 });
 
 // API for payment
-app.post('/payment/create', async(req,res) =>{
+app.post('/payment/create', async (req, res) => {
     const total = req.body.amount;
     // console.log("Payment request recieved for this rupees", total);
 
     const payment = await stripe.paymentIntents.create({
-        amount:total * 100,
-        currency:'inr',
+        amount: total * 100,
+        currency: 'inr',
     });
 
     res.status(201).send({
