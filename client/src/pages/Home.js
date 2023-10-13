@@ -5,6 +5,8 @@ import axios from 'axios';
 import Card from '../components/Card';
 import HamburgerMenu from '../components/HamburgerMenu';
 
+const baseURL = process.env.REACT_APP_BASE_URL;
+
 const Home = () => {
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState('');
@@ -18,7 +20,7 @@ const Home = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get('/api/products/get', {
+      const response = await axios.get(`${baseURL}/api/products/get`, {
         params: {
           category: selectedCategory,
         },
@@ -30,7 +32,7 @@ const Home = () => {
   };
   const fetchAllProducts = async () => {
     try {
-      const response = await axios.get('/api/products/get');
+      const response = await axios.get(`${baseURL}/api/products/get`);
       setProducts(response.data);
     } catch (error) {
       console.error('Error fetching all products:', error);

@@ -5,6 +5,8 @@ import { useStateValue } from '../StateProvider';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
+const baseURL = process.env.REACT_APP_BASE_URL;
+
 const NavbarContainer = styled.nav`
   display: flex;
   height: 5vh;
@@ -64,7 +66,7 @@ const Navbar = () => {
 
   const userNameShow = async () => {
     try {
-      const response = await axios.get('/getdata', {
+      const response = await axios.get(`${baseURL}/getdata`, {
         headers: {
           'Content-Type': 'application/json',
         },

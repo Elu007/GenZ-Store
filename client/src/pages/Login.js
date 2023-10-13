@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { useStateValue } from '../StateProvider';
 import toast from 'react-hot-toast';
 
+const baseURL = process.env.REACT_APP_BASE_URL;
+
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
@@ -14,7 +16,7 @@ const Login = () => {
 
   const login = async (e) => {
     e.preventDefault();
-    const res = await fetch('/login', {
+    const res = await fetch(`${baseURL}/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -70,7 +72,7 @@ const Login = () => {
           and <span> Privacy Notice</span>
         </InfoText>
       </FormContainer>
-      <SignUpButton onClick={() => navigate("/signup")}>
+      <SignUpButton onClick={() => navigate(`${baseURL}/signup`)}>
         Create Account in GenZ Store
       </SignUpButton>
     </Container>

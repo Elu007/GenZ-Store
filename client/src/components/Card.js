@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { useStateValue } from '../StateProvider';
 import toast from 'react-hot-toast';
 
+const baseURL = process.env.REACT_APP_BASE_URL;
+
 const CardWrapper = styled.div`
   width: 24vw;
   border: 1px solid #ddd;
@@ -71,7 +73,7 @@ const Card = ({ imageUrl, title, price, rating, id }) => {
                     <h4>{title}</h4>
                 </CardTitle>
                     <h3>Price: ₹{price}</h3>
-                <Link to={`/api/products/get/${id}`}><CardButton>View Details</CardButton></Link>
+                <Link to={`${baseURL}/api/products/get/${id}`}><CardButton>View Details</CardButton></Link>
                 <CardButton onClick={addToBasket}>Add to Cart</CardButton>
             </CardContent>
         </CardWrapper>

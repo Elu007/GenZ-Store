@@ -9,6 +9,8 @@ import { Rating } from '@mui/material';
 import toast from 'react-hot-toast';
 import { CardElement,useElements,useStripe } from '@stripe/react-stripe-js';
 
+const baseURL = process.env.REACT_APP_BASE_URL;
+
 const Payment = () => {
   const [{ address, basket, user }, dispatch] = useStateValue();
   const navigate = useNavigate();
@@ -18,7 +20,7 @@ const Payment = () => {
 
   useEffect(()=>{
     const fetchClientSecret = async()=>{
-      const data = await axios.post('/payment/create', {
+      const data = await axios.post(`${baseURL}/payment/create`, {
         amount:getBasketTotal(basket),
       });
       setClientSecret(data.data.clientSecret);
