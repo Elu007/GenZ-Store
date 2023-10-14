@@ -18,7 +18,7 @@ const AddProduct = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('/api/products/add', productData);
+      const response = await axios.post('https://genzstore.onrender.com/api/products/add', productData);
       console.log('Product added:', response.data);
       // Optionally, you can redirect the user or show a success message.
       setProductData(initialData);

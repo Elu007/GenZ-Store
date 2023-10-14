@@ -31,16 +31,6 @@ app.get('/', (req, res) => {
     res.send('hello world')
 })
 
-// Add this middleware to set the appropriate CORS headers
-// This handles the cors error while deploying
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'https://gen-z-store.vercel.app');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    res.header('Access-Control-Allow-Credentials', 'true');
-    next();
-});
-
 const allowedOrigins = ['https://gen-z-store.vercel.app'];
 
 // Configure CORS to allow only the specified origins
@@ -56,6 +46,16 @@ app.use(
     credentials: true, // Enable credentials (cookies, Authorization headers, etc.)
   })
 );
+// Add this middleware to set the appropriate CORS headers
+// This handles the cors error while deploying
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', 'https://gen-z-store.vercel.app');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.header('Access-Control-Allow-Credentials', 'true');
+    next();
+});
+
 
 // API to Add product in database
 app.post("/api/products/add", async (req, res) => {
