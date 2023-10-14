@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const express = require('express');
 const router = express.Router();
@@ -14,6 +15,10 @@ mongoose.connect(DB).then(() =>{
 
 const User = require("../models/User");
 
+router.use(cors({
+    origin: 'https://gen-z-store.vercel.app',  // Replace with your Vercel frontend URL
+    credentials: true,
+}));
 
 // Using async await
 
