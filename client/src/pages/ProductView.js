@@ -7,7 +7,6 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import { useStateValue } from '../StateProvider';
 import toast from 'react-hot-toast';
 
-const baseURL = process.env.REACT_APP_BASE_URL;
 
 const ProductView = () => {
   const { id } = useParams(); // Get the productId from the URL
@@ -26,7 +25,7 @@ const ProductView = () => {
   const fetchProduct = async () => {
     try {
       const productId = id;
-      const response = await axios.get(`${baseURL}/api/products/get/${productId}`);
+      const response = await axios.get(`https://genzstore.onrender.com/api/products/get/${productId}`);
       setProduct(response.data);
       setLoading(false); // Set loading to false when data is fetched
     } catch (error) {

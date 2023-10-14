@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
-const baseURL = process.env.REACT_APP_BASE_URL;
 const Signup = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState({
@@ -24,7 +23,7 @@ const Signup = () => {
     const { name, email, password, cpassword } = user;
 
     try {
-      const response = await axios.post(`${baseURL}/signup`, {
+      const response = await axios.post(`https://genzstore.onrender.com/signup`, {
         name,
         email,
         password,

@@ -5,8 +5,6 @@ import { useStateValue } from '../StateProvider';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
-const baseURL = process.env.REACT_APP_BASE_URL;
-
 const NavbarContainer = styled.nav`
   display: flex;
   height: 5vh;
@@ -66,7 +64,7 @@ const Navbar = () => {
 
   const userNameShow = async () => {
     try {
-      const response = await axios.get(`${baseURL}/getdata`, {
+      const response = await axios.get(`https://genzstore.onrender.com/getdata`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -89,7 +87,7 @@ const Navbar = () => {
   // Logout function
   const handleLogout = async () => {
     try {
-      const response = await axios.get('/logout', {
+      const response = await axios.get('https://genzstore.onrender.com/logout', {
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',

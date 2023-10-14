@@ -9,7 +9,6 @@ import { Rating } from '@mui/material';
 import toast from 'react-hot-toast';
 import { CardElement,useElements,useStripe } from '@stripe/react-stripe-js';
 
-const baseURL = process.env.REACT_APP_BASE_URL;
 
 const Payment = () => {
   const [{ address, basket, user }, dispatch] = useStateValue();
@@ -20,7 +19,7 @@ const Payment = () => {
 
   useEffect(()=>{
     const fetchClientSecret = async()=>{
-      const data = await axios.post(`${baseURL}/payment/create`, {
+      const data = await axios.post(`https://genzstore.onrender.com/payment/create`, {
         amount:getBasketTotal(basket),
       });
       setClientSecret(data.data.clientSecret);
