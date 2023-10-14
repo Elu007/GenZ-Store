@@ -41,6 +41,22 @@ app.use((req, res, next) => {
     next();
 });
 
+const allowedOrigins = ['https://gen-z-store.vercel.app'];
+
+// Configure CORS to allow only the specified origins
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true, // Enable credentials (cookies, Authorization headers, etc.)
+  })
+);
+
 // API to Add product in database
 app.post("/api/products/add", async (req, res) => {
     try {
