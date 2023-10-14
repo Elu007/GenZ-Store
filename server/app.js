@@ -11,6 +11,14 @@ app.use(bodyParser.json());
 app.use(express.json())
 app.use(cors());
 
+// Configure CORS
+app.use(
+    cors({
+        origin: 'https://gen-z-store.vercel.app', // Allow your Vercel frontend
+        credentials: true,
+    })
+);
+
 // Import the product model
 const Product = require('./models/Product');
 
@@ -30,31 +38,6 @@ app.use(require('./routes/auth'));
 app.get('/', (req, res) => {
     res.send('hello world')
 })
-
-const allowedOrigins = ['https://gen-z-store.vercel.app'];
-
-// Configure CORS to allow only the specified origins
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
-    },
-    credentials: true, // Enable credentials (cookies, Authorization headers, etc.)
-  })
-);
-// Add this middleware to set the appropriate CORS headers
-// This handles the cors error while deploying
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'https://gen-z-store.vercel.app');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    res.header('Access-Control-Allow-Credentials', 'true');
-    next();
-});
 
 
 // API to Add product in database

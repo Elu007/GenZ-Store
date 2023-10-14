@@ -15,27 +15,12 @@ mongoose.connect(DB).then(() =>{
 
 const User = require("../models/User");
 
-// Add this middleware to set the appropriate CORS headers
-// This handles the cors error while deploying
-router.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'https://gen-z-store.vercel.app');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    res.header('Access-Control-Allow-Credentials', 'true');
-    next();
-});
-
 const allowedOrigins = ['https://gen-z-store.vercel.app'];
 
+// Configure CORS to allow only the specified origins
 router.use(
   cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
-    },
+    origin: allowedOrigins, // Allow only specified origins
     credentials: true, // Enable credentials (cookies, Authorization headers, etc.)
   })
 );
