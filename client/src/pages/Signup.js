@@ -23,7 +23,7 @@ const Signup = () => {
     const { name, email, password, cpassword } = user;
 
     try {
-      const response = await axios.post(`https://genzstore.onrender.com/signup`, {
+      const response = await axios.post('https://genzstore.onrender.com/signup', {
         name,
         email,
         password,

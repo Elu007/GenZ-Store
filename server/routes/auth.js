@@ -18,6 +18,7 @@ const corsOptions = {
         }
     },
     credentials: true,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
 };
 
 // Use this single CORS configuration
@@ -34,7 +35,7 @@ const User = require("../models/User");
 
 // Using async await
 
-router.post('/signup', async (req, res) => {
+router.post('https://genzstore.onrender.com/signup', async (req, res) => {
     const { name, email, password, cpassword } = req.body;
 
     if (!name || !email || !password || !cpassword) {
