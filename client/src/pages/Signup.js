@@ -28,6 +28,8 @@ const Signup = () => {
         email,
         password,
         cpassword,
+      }, {
+        withCredentials: true,
       });
 
       if (response.status === 201) {
