@@ -15,14 +15,12 @@ mongoose.connect(DB).then(() =>{
 
 const User = require("../models/User");
 
-const allowedOrigins = ['https://gen-z-store.vercel.app'];
-
-// Configure CORS to allow only the specified origins
+router.use(cors());
 router.use(
-  cors({
-    origin: allowedOrigins, // Allow only specified origins
-    credentials: true, // Enable credentials (cookies, Authorization headers, etc.)
-  })
+    cors({
+        origin: 'https://gen-z-store.vercel.app', // Allow your Vercel frontend
+        credentials: true,
+    })
 );
 
 // Using async await
