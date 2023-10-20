@@ -7,22 +7,6 @@ const bcrypt = require('bcryptjs');
 const authenticate = require("../middleware/authenticate");
 const cookieParser = require("cookie-parser");
 
-const allowedOrigins = ['https://gen-z-store.vercel.app'];
-
-const corsOptions = {
-    origin: function (origin, callback) {
-        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
-    credentials: true,
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
-};
-
-// Use this single CORS configuration
-router.use(cors(corsOptions));
 
 const DB = process.env.MONGODB_URI;
 
@@ -32,6 +16,13 @@ mongoose.connect(DB).then(() =>{
 
 const User = require("../models/User");
 
+router.use(
+    cors({
+        origin: "https://gen-z-store.vercel.app",
+        methods: ["GET", "POST", "DELETE", "UPDATE", "PUT"],
+        credentials: true,
+    })
+);
 
 // Using async await
 

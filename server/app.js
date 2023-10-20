@@ -14,7 +14,8 @@ app.use(cors());
 // Configure CORS
 app.use(
     cors({
-        origin: 'https://gen-z-store.vercel.app', // Allow your Vercel frontend
+        origin: "https://gen-z-store.vercel.app",
+        methods: ["GET", "POST", "DELETE", "UPDATE", "PUT"],
         credentials: true,
     })
 );
