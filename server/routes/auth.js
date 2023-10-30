@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const express = require('express');
 const router = express.Router();
@@ -16,17 +15,10 @@ mongoose.connect(DB).then(() =>{
 
 const User = require("../models/User");
 
-router.use(
-    cors({
-        origin: "https://gen-z-store.vercel.app",
-        methods: ["GET", "POST", "DELETE", "UPDATE", "PUT"],
-        credentials: true,
-    })
-);
 
 // Using async await
 
-router.post('https://genzstore.onrender.com/signup', async (req, res) => {
+router.post('/signup', async (req, res) => {
     const { name, email, password, cpassword } = req.body;
 
     if (!name || !email || !password || !cpassword) {
